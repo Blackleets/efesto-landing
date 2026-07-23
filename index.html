@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Efesto — Tu navegador como radar de deal-flow privado</title>
+<meta name="description" content="Efesto convierte CÓMO navegas en señal de oportunidades. Privado, local, y actuando por ti." />
+<style>
+  :root{
+    --bg:#121316; --card:#1a1d22; --line:#262a31;
+    --orange:#ff6e1e; --pink:#ff5a8c; --text:#f2f3f5; --muted:#9aa0a8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  header{padding:28px 0;display:flex;align-items:center;gap:12px}
+  .orb{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 50% 50%,var(--pink) 0 18%,#2a1d18 40%,transparent 60%),var(--orange);box-shadow:0 0 0 3px #2a2e35,0 0 18px rgba(255,110,30,.5)}
+  .brand{font-weight:800;font-size:20px;letter-spacing:.5px}
+  .brand b{color:var(--orange)}
+  .hero{padding:60px 0 40px;text-align:center}
+  .hero h1{font-size:clamp(28px,5vw,46px);line-height:1.15;font-weight:850}
+  .hero h1 span{color:var(--orange)}
+  .hero p{color:var(--muted);max-width:640px;margin:18px auto 0;font-size:18px}
+  .cta{margin:32px auto 0;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  input[type=email]{background:var(--card);border:1px solid var(--line);color:var(--text);padding:14px 16px;border-radius:10px;min-width:280px;font-size:15px}
+  button{background:var(--orange);color:#1a1208;border:0;padding:14px 22px;border-radius:10px;font-weight:800;cursor:pointer;font-size:15px}
+  button:disabled{opacity:.6;cursor:default}
+  .msg{margin-top:12px;font-size:14px;min-height:20px;color:var(--pink)}
+  .pill{display:inline-block;background:#211a14;color:var(--orange);border:1px solid #3a2a18;padding:5px 12px;border-radius:999px;font-size:13px;font-weight:700;margin-bottom:18px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:48px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .card h3{font-size:17px;margin-bottom:8px}
+  .card h3 b{color:var(--orange)}
+  .card p{color:var(--muted);font-size:14px}
+  .nicho{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;margin:24px 0}
+  .nicho h3{color:var(--orange);font-size:15px;letter-spacing:.4px;text-transform:uppercase;margin-bottom:10px}
+  footer{padding:40px 0 60px;color:var(--muted);font-size:13px;text-align:center;border-top:1px solid var(--line);margin-top:40px}
+  .count{color:var(--text);font-weight:800}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="orb"></div>
+    <div class="brand">EFESTO<b>.</b></div>
+  </header>
+
+  <section class="hero">
+    <div class="pill">Local-first · Privado · Actúa por ti</div>
+    <h1>Tu navegador ya sabe dónde están las <span>oportunidades</span>.<br/>Efesto las saca.</h1>
+    <p>Mientras navegas, Efesto aprende de <b>CÓMO</b> investigas —no de palabras clave— y te avisa (y actúa) sobre deals, startups y movimientos que <b>te importan</b>. Sin nube, sin que tus datos salgan de tu máquina.</p>
+    <form class="cta" id="waitForm">
+      <input type="email" id="email" placeholder="tu@email.com" required />
+      <button type="submit" id="submitBtn">Entrar a la lista</button>
+    </form>
+    <div class="msg" id="msg"></div>
+    <p style="margin-top:10px;font-size:13px;color:var(--muted)"><span class="count" id="count">—</span> en la waitlist · privado, sin spam</p>
+  </section>
+
+  <div class="grid">
+    <div class="card">
+      <h3><b>B.</b> Radar por intención</h3>
+      <p>Detecta oportunidades desde tu comportamiento real de navegación, no de RSS genéricos. La señal que nadie más tiene.</p>
+    </div>
+    <div class="card">
+      <h3><b>C.</b> Actúa, no solo guarda</h3>
+      <p>Te arma el pitch, agenda el follow-up, te avisa del timing. Un empleado, no una libreta.</p>
+    </div>
+    <div class="card">
+      <h3><b>A.</b> Privado + red de confianza</h3>
+      <p>Tus datos nunca salen. Solo señales de intención se cruzan con tu red, de forma cifrada.</p>
+    </div>
+  </div>
+
+  <div class="nicho">
+    <h3>Para quién lo estamos abriendo primero</h3>
+    <p><b>VCs, ángeles y scouts de deal-flow.</b> Gente con capital y sin tiempo de detectar el próximo movimiento. Efesto convierte tu curiosidad diaria en un radar de inversiones que trabaja solo.</p>
+  </div>
+
+  <footer>
+    Efesto · Hecho por un solo founder con IA de operaciones · Waitlist temprana = acceso gratuito de por vida al tier pro.
+  </footer>
+</div>
+
+<script>
+// Waitlist: intenta enviar a un endpoint real (Formspree/Waitlist) y SIEMPRE
+// guarda localmente como respaldo. Pon tu endpoint abajo (gratis en formspree.com).
+const FORM_ENDPOINT = ''; // <-- pega aquí tu URL de Formspree (ej. https://formspree.io/f/xxxx)
+const STORE = 'efesto_waitlist_v1';
+  const COUNT_KEY = 'efesto_waitlist_count_v1';
+  const form = document.getElementById('waitForm');
+  const emailEl = document.getElementById('email');
+  const msg = document.getElementById('msg');
+  const btn = document.getElementById('submitBtn');
+  const countEl = document.getElementById('count');
+
+  function load(){
+    try{ const c = localStorage.getItem(COUNT_KEY); countEl.textContent = c ? c : '0'; }catch(e){ countEl.textContent='0'; }
+  }
+  load();
+
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const v = (emailEl.value||'').trim();
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){ msg.style.color='var(--pink)'; msg.textContent='Pon un email válido.'; return; }
+    let list=[];
+    try{ list = JSON.parse(localStorage.getItem(STORE)||'[]'); }catch(e){ list=[]; }
+    if(list.includes(v)){ msg.style.color='var(--orange)'; msg.textContent='Ya estás en la lista ✅'; return; }
+    btn.disabled = true; btn.textContent = 'Enviando…';
+    // 1) Intento enviar al endpoint real (si lo configuraste)
+    if (FORM_ENDPOINT) {
+      try {
+        await fetch(FORM_ENDPOINT, {
+          method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},
+          body: JSON.stringify({ email:v, src:'efesto-landing' })
+        });
+      } catch(err) { /* respaldo local abajo */ }
+    }
+    // 2) SIEMPRE guardo local (respaldo + export)
+    list.push(v);
+    try{
+      localStorage.setItem(STORE, JSON.stringify(list));
+      localStorage.setItem(COUNT_KEY, String(list.length));
+      countEl.textContent = String(list.length);
+      msg.style.color='var(--orange)'; msg.textContent='¡Listo! Eres #'+list.length+'. Te avisamos sin spam.';
+      emailEl.value='';
+      const blob = new Blob([JSON.stringify(list,null,2)], {type:'application/json'});
+      const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='efesto-waitlist.json'; a.click();
+    }catch(err){ msg.style.color='var(--pink)'; msg.textContent='Guardado local OK, pero sin exportar.'; }
+    finally { btn.disabled = false; btn.textContent = 'Entrar a la lista'; }
+  });
+</script>
+</body>
+</html>
