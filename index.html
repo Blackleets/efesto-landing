@@ -3,132 +3,177 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Efesto — Tu navegador como radar de deal-flow privado</title>
+<title>Efesto — tu navegador como radar de deal-flow privado</title>
 <meta name="description" content="Efesto convierte CÓMO navegas en señal de oportunidades. Privado, local, y actuando por ti." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;590&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#121316; --card:#1a1d22; --line:#262a31;
-    --orange:#ff6e1e; --pink:#ff5a8c; --text:#f2f3f5; --muted:#9aa0a8;
+    --bg:#08090a; --panel:#0f1011; --surface:#191a1b; --surface2:#28282c;
+    --t1:#f7f8f8; --t2:#d0d6e0; --t3:#8a8f98; --t4:#62666d;
+    --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.05);
+    --accent:#ff6e1e; --accent-soft:rgba(255,110,30,.12);
+    --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
-  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
-  header{padding:28px 0;display:flex;align-items:center;gap:12px}
-  .orb{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 50% 50%,var(--pink) 0 18%,#2a1d18 40%,transparent 60%),var(--orange);box-shadow:0 0 0 3px #2a2e35,0 0 18px rgba(255,110,30,.5)}
-  .brand{font-weight:800;font-size:20px;letter-spacing:.5px}
-  .brand b{color:var(--orange)}
-  .hero{padding:60px 0 40px;text-align:center}
-  .hero h1{font-size:clamp(28px,5vw,46px);line-height:1.15;font-weight:850}
-  .hero h1 span{color:var(--orange)}
-  .hero p{color:var(--muted);max-width:640px;margin:18px auto 0;font-size:18px}
-  .cta{margin:32px auto 0;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-  input[type=email]{background:var(--card);border:1px solid var(--line);color:var(--text);padding:14px 16px;border-radius:10px;min-width:280px;font-size:15px}
-  button{background:var(--orange);color:#1a1208;border:0;padding:14px 22px;border-radius:10px;font-weight:800;cursor:pointer;font-size:15px}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--bg);color:var(--t2);
+    font-family:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    font-feature-settings:'cv01','ss03';
+    line-height:1.5;font-weight:400;-webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  a{color:inherit;text-decoration:none}
+
+  /* nav */
+  header{position:sticky;top:0;z-index:20;background:rgba(8,9,10,.72);
+    backdrop-filter:blur(12px);border-bottom:1px solid var(--line2)}
+  .nav{display:flex;align-items:center;gap:14px;height:56px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:590;color:var(--t1);letter-spacing:-.2px;font-size:15px}
+  .orb{width:18px;height:18px;border-radius:50%;
+    background:radial-gradient(circle at 50% 45%,#ff5a8c 0 22%,#2a1d18 42%,transparent 60%),var(--accent);
+    box-shadow:0 0 0 1px rgba(255,110,30,.5),0 0 14px rgba(255,110,30,.45)}
+  .nav .tag{font-family:var(--mono);font-size:11px;color:var(--t4);border:1px solid var(--line);
+    padding:2px 8px;border-radius:999px;letter-spacing:.3px}
+  .nav .spacer{flex:1}
+  .nav a.lnk{font-size:13px;font-weight:510;color:var(--t3)}
+  .nav a.lnk:hover{color:var(--t1)}
+
+  /* hero */
+  .hero{padding:120px 0 90px;max-width:780px}
+  .kicker{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.4px;margin-bottom:22px}
+  h1{font-size:clamp(40px,6.4vw,68px);line-height:1.02;font-weight:510;letter-spacing:-1.6px;
+    color:var(--t1);text-wrap:pretty}
+  h1 .dim{color:var(--t3);font-weight:400}
+  .sub{margin-top:26px;font-size:19px;line-height:1.55;color:var(--t3);max-width:620px;font-weight:400}
+  .cta{margin-top:38px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  input[type=email]{background:rgba(255,255,255,.02);border:1px solid var(--line);
+    color:var(--t1);padding:13px 15px;border-radius:7px;min-width:270px;font-size:15px;font-family:inherit}
+  input[type=email]:focus{outline:none;border-color:rgba(255,110,30,.5);box-shadow:0 0 0 3px var(--accent-soft)}
+  input[type=email]::placeholder{color:var(--t4)}
+  button{background:var(--accent);color:#1a0f04;border:0;padding:13px 22px;border-radius:7px;
+    font-weight:590;cursor:pointer;font-size:15px;font-family:inherit;transition:background .15s}
+  button:hover{background:#ff8345}
   button:disabled{opacity:.6;cursor:default}
-  .msg{margin-top:12px;font-size:14px;min-height:20px;color:var(--pink)}
-  .pill{display:inline-block;background:#211a14;color:var(--orange);border:1px solid #3a2a18;padding:5px 12px;border-radius:999px;font-size:13px;font-weight:700;margin-bottom:18px}
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:48px 0}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
-  .card h3{font-size:17px;margin-bottom:8px}
-  .card h3 b{color:var(--orange)}
-  .card p{color:var(--muted);font-size:14px}
-  .nicho{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;margin:24px 0}
-  .nicho h3{color:var(--orange);font-size:15px;letter-spacing:.4px;text-transform:uppercase;margin-bottom:10px}
-  footer{padding:40px 0 60px;color:var(--muted);font-size:13px;text-align:center;border-top:1px solid var(--line);margin-top:40px}
-  .count{color:var(--text);font-weight:800}
-  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  .msg{margin-top:12px;font-size:14px;min-height:18px;font-family:var(--mono)}
+  .lead{margin-top:14px;font-size:13px;color:var(--t4);font-family:var(--mono)}
+
+  /* signal strip (reemplaza el grid de 3 cards) */
+  .signal{margin:10px 0 110px;border-top:1px solid var(--line2);border-bottom:1px solid var(--line2)}
+  .row{display:grid;grid-template-columns:120px 1fr auto;gap:24px;align-items:baseline;
+    padding:26px 4px;border-bottom:1px solid var(--line2)}
+  .row:last-child{border-bottom:0}
+  .row .idx{font-family:var(--mono);font-size:12px;color:var(--t4)}
+  .row h3{font-size:19px;font-weight:510;color:var(--t1);letter-spacing:-.3px;margin-bottom:6px}
+  .row p{font-size:15px;color:var(--t3);max-width:560px}
+  .row .val{font-family:var(--mono);font-size:12px;color:var(--accent);
+    border:1px solid rgba(255,110,30,.3);padding:3px 10px;border-radius:999px;white-space:nowrap}
+
+  /* who */
+  .who{padding:0 0 120px;max-width:720px}
+  .who .k{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.4px;margin-bottom:18px}
+  .who h2{font-size:clamp(26px,3.4vw,34px);font-weight:510;letter-spacing:-.8px;color:var(--t1);line-height:1.1}
+  .who p{margin-top:18px;font-size:17px;color:var(--t3);line-height:1.55}
+
+  footer{padding:40px 0 70px;border-top:1px solid var(--line2);
+    color:var(--t4);font-size:13px;font-family:var(--mono);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+  @media(max-width:680px){
+    .hero{padding:80px 0 60px}
+    .row{grid-template-columns:1fr;gap:8px}
+    .row .val{justify-self:start}
+    .nav .lnk{display:none}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <div class="orb"></div>
-    <div class="brand">EFESTO<b>.</b></div>
-  </header>
+<header>
+  <div class="wrap nav">
+    <div class="brand"><span class="orb"></span> Efesto</div>
+    <span class="tag">local-first · privado</span>
+    <span class="spacer"></span>
+    <a class="lnk" href="#signal">Cómo</a>
+    <a class="lnk" href="#who">Para quién</a>
+  </div>
+</header>
 
+<main class="wrap">
   <section class="hero">
-    <div class="pill">Local-first · Privado · Actúa por ti</div>
-    <h1>Tu navegador ya sabe dónde están las <span>oportunidades</span>.<br/>Efesto las saca.</h1>
-    <p>Mientras navegas, Efesto aprende de <b>CÓMO</b> investigas —no de palabras clave— y te avisa (y actúa) sobre deals, startups y movimientos que <b>te importan</b>. Sin nube, sin que tus datos salgan de tu máquina.</p>
+    <div class="kicker">// radar de deal-flow privado</div>
+    <h1>Tu navegador ya sabe dónde están las oportunidades.<br/><span class="dim">Efesto las saca — sin que tus datos salgan de tu máquina.</span></h1>
+    <p class="sub">Mientras investigas, Efesto aprende de <b style="color:var(--t1);font-weight:510">CÓMO</b> navegas —no de palabras clave— y actúa sobre lo que te importa. Un empleado de inteligencia, no una libreta.</p>
     <form class="cta" id="waitForm">
-      <input type="email" id="email" placeholder="tu@email.com" required />
+      <input type="email" id="email" placeholder="tu@email.com" required autocomplete="email" />
       <button type="submit" id="submitBtn">Entrar a la lista</button>
     </form>
     <div class="msg" id="msg"></div>
-    <p style="margin-top:10px;font-size:13px;color:var(--muted)"><span class="count" id="count">—</span> en la waitlist · privado, sin spam</p>
+    <div class="lead">waitlist temprana · <span id="count" style="color:var(--t3)">—</span> inside · sin spam, sin nube</div>
   </section>
 
-  <div class="grid">
-    <div class="card">
-      <h3><b>B.</b> Radar por intención</h3>
-      <p>Detecta oportunidades desde tu comportamiento real de navegación, no de RSS genéricos. La señal que nadie más tiene.</p>
+  <section class="signal" id="signal">
+    <div class="row">
+      <div class="idx">01 / B</div>
+      <div><h3>Radar por intención, no por keywords</h3><p>El scoring usa tu comportamiento real —tiempo de lectura, profundidad, revisitas, acción explícita— no el texto de la página. Es la señal que nadie más tiene.</p></div>
+      <div class="val">motor activo</div>
     </div>
-    <div class="card">
-      <h3><b>C.</b> Actúa, no solo guarda</h3>
-      <p>Te arma el pitch, agenda el follow-up, te avisa del timing. Un empleado, no una libreta.</p>
+    <div class="row">
+      <div class="idx">02 / C</div>
+      <div><h3>Actúa, no solo guarda</h3><p>Cuando la señal es fuerte, Efesto arma el outreach, el pitch y agenda el follow-up. Decide si actuar solo cuando hay interés real — sin spam.</p></div>
+      <div class="val">engine listo</div>
     </div>
-    <div class="card">
-      <h3><b>A.</b> Privado + red de confianza</h3>
-      <p>Tus datos nunca salen. Solo señales de intención se cruzan con tu red, de forma cifrada.</p>
+    <div class="row">
+      <div class="idx">03 / A</div>
+      <div><h3>Privado + red de confianza</h3><p>Tus datos nunca salen. Solo señales de intención se cruzan con tu red, cifradas. Lo local es la feature, no el límite.</p></div>
+      <div class="val">por disear</div>
     </div>
-  </div>
+  </section>
 
-  <div class="nicho">
-    <h3>Para quién lo estamos abriendo primero</h3>
-    <p><b>VCs, ángeles y scouts de deal-flow.</b> Gente con capital y sin tiempo de detectar el próximo movimiento. Efesto convierte tu curiosidad diaria en un radar de inversiones que trabaja solo.</p>
-  </div>
+  <section class="who" id="who">
+    <div class="k">// apertura</div>
+    <h2>Lo estamos abriendo para VCs, ángeles y scouts de deal-flow.</h2>
+    <p>Gente con capital y sin tiempo de detectar el próximo movimiento. Efesto convierte tu curiosidad diaria —lo que lees, lo que ignoras, a dónde vuelves— en un radar de inversiones que trabaja solo, en tu máquina.</p>
+  </section>
+</main>
 
-  <footer>
-    Efesto · Hecho por un solo founder con IA de operaciones · Waitlist temprana = acceso gratuito de por vida al tier pro.
-  </footer>
-</div>
+<footer class="wrap">
+  <span>efesto · built by one founder + AI ops</span>
+  <span>waitlist temprana = pro gratis de por vida</span>
+</footer>
 
 <script>
-// Waitlist: intenta enviar a un endpoint real (Formspree/Waitlist) y SIEMPRE
-// guarda localmente como respaldo. Pon tu endpoint abajo (gratis en formspree.com).
-const FORM_ENDPOINT = ''; // <-- pega aquí tu URL de Formspree (ej. https://formspree.io/f/xxxx)
-const STORE = 'efesto_waitlist_v1';
+  const FORM_ENDPOINT = ''; // pega aquí tu URL de Formspree (https://formspree.io/f/xxxx)
+  const STORE = 'efesto_waitlist_v1';
   const COUNT_KEY = 'efesto_waitlist_count_v1';
   const form = document.getElementById('waitForm');
   const emailEl = document.getElementById('email');
   const msg = document.getElementById('msg');
   const btn = document.getElementById('submitBtn');
   const countEl = document.getElementById('count');
-
-  function load(){
-    try{ const c = localStorage.getItem(COUNT_KEY); countEl.textContent = c ? c : '0'; }catch(e){ countEl.textContent='0'; }
-  }
+  function load(){ try{ const c=localStorage.getItem(COUNT_KEY); countEl.textContent=c?c:'0'; }catch(e){ countEl.textContent='0'; } }
   load();
-
   form.addEventListener('submit', async (e)=>{
     e.preventDefault();
-    const v = (emailEl.value||'').trim();
-    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){ msg.style.color='var(--pink)'; msg.textContent='Pon un email válido.'; return; }
-    let list=[];
-    try{ list = JSON.parse(localStorage.getItem(STORE)||'[]'); }catch(e){ list=[]; }
-    if(list.includes(v)){ msg.style.color='var(--orange)'; msg.textContent='Ya estás en la lista ✅'; return; }
-    btn.disabled = true; btn.textContent = 'Enviando…';
-    // 1) Intento enviar al endpoint real (si lo configuraste)
-    if (FORM_ENDPOINT) {
-      try {
-        await fetch(FORM_ENDPOINT, {
-          method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},
-          body: JSON.stringify({ email:v, src:'efesto-landing' })
-        });
-      } catch(err) { /* respaldo local abajo */ }
-    }
-    // 2) SIEMPRE guardo local (respaldo + export)
+    const v=(emailEl.value||'').trim();
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){ msg.style.color='var(--t4)'; msg.textContent='// email inválido'; return; }
+    let list=[]; try{ list=JSON.parse(localStorage.getItem(STORE)||'[]'); }catch(e){ list=[]; }
+    if(list.includes(v)){ msg.style.color='var(--accent)'; msg.textContent='// ya estás en la lista ✅'; return; }
+    btn.disabled=true; btn.textContent='enviando…';
+    if(FORM_ENDPOINT){ try{ await fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email:v,src:'efesto'})}); }catch(err){} }
     list.push(v);
     try{
-      localStorage.setItem(STORE, JSON.stringify(list));
-      localStorage.setItem(COUNT_KEY, String(list.length));
-      countEl.textContent = String(list.length);
-      msg.style.color='var(--orange)'; msg.textContent='¡Listo! Eres #'+list.length+'. Te avisamos sin spam.';
+      localStorage.setItem(STORE,JSON.stringify(list));
+      localStorage.setItem(COUNT_KEY,String(list.length));
+      countEl.textContent=String(list.length);
+      msg.style.color='var(--accent)'; msg.textContent='// listo · eres #'+list.length;
       emailEl.value='';
-      const blob = new Blob([JSON.stringify(list,null,2)], {type:'application/json'});
-      const a = document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='efesto-waitlist.json'; a.click();
-    }catch(err){ msg.style.color='var(--pink)'; msg.textContent='Guardado local OK, pero sin exportar.'; }
-    finally { btn.disabled = false; btn.textContent = 'Entrar a la lista'; }
+      const blob=new Blob([JSON.stringify(list,null,2)],{type:'application/json'});
+      const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='efesto-waitlist.json'; a.click();
+    }catch(err){ msg.style.color='var(--t4)'; msg.textContent='// guardado local ok'; }
+    finally{ btn.disabled=false; btn.textContent='Entrar a la lista'; }
   });
 </script>
 </body>
